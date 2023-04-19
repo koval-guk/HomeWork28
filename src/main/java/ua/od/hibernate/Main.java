@@ -17,8 +17,8 @@ public class Main {
             studentDB.add(s3);
             studentDB.add(s4);
             studentDB.add(s5);
-            studentDB.deleteById(2);
-            studentDB.update(s4);
+            studentDB.deleteById(102);
+            studentDB.update(252,"updatedStudent", "newEmail");
             System.out.println(studentDB.getAll());
             System.out.println(studentDB.getById(1));
         } finally {

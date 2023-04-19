@@ -28,17 +28,24 @@ public class StudentJpaDAO implements StudentDAO {
     @Override
     public void deleteById(long id) {
         entityManager.getTransaction().begin();
-        entityManager.remove(getById(id));
+        Student student = getById(id);
+        if (student != null){
+            entityManager.remove(student);
+        }
         entityManager.flush();
         entityManager.getTransaction().commit();
     }
 
     @Override
-    public void update(Student student) {
-        entityManager.getTransaction().begin();
-        entityManager.merge(student);
-        entityManager.flush();
-        entityManager.getTransaction().commit();
+    public void update(long id, String name, String email) {
+        Student student = new Student(name, email);
+        if (getById(id) != null) {
+            student.setId(id);
+            entityManager.getTransaction().begin();
+            entityManager.merge(student);
+            entityManager.flush();
+            entityManager.getTransaction().commit();
+        }
     }
 
     @Override
